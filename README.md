@@ -39,38 +39,40 @@ A comprehensive WebSocket system featuring a high-performance, scalable server i
 ### Nginx Setup
 
 1. Install Nginx if not already installed:
-bash
+```bash
 sudo apt update
 sudo apt install nginx
-
+```
 
 2. Replace the default Nginx configuration:
-bash
+```bash
 sudo cp nginx.conf /etc/nginx/nginx.conf
 sudo cp sites-available/default /etc/nginx/sites-available/default
-
+```
 
 3. Test and restart Nginx:
-bash
+```bash
 sudo nginx -t
 sudo systemctl restart nginx
-
+```
 
 ### Docker Setup
 
 1. Clone the repository:
-bash
+```bash
 git clone https://github.com/darkball1/stress-testing.git
 cd stress-testing
-
+```
 
 2. Start the server using Docker Compose:
+```bash
 docker compose up --build -d
-
+```
 
 3. Monitor the server logs:
+```bash
 docker logs stress-testing-main-app-1
-
+```
 
 ### Development Setup
 
