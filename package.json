@@ -1,0 +1,22 @@
+{
+  "name": "sigiq",
+  "version": "1.0.0",
+  "description": "WebSocket benchmark script",
+  "main": "benchmark.js",
+  "scripts": {
+    "start": "node advanced_benchmark.js",
+    "server": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "chart.js": "^3.9.1",
+    "chartjs-node-canvas": "^4.1.3",
+    "ioredis": "^5.4.1",
+    "redis": "^4.7.0",
+    "uuid": "^10.0.0",
+    "uWebSockets.js": "uNetworking/uWebSockets.js#v20.41.0",
+    "ws": "^8.13.0"
+  }
+}
