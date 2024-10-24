@@ -1,4 +1,4 @@
-# Scalable WebSocket System
+# Stress Testing for Scalable WebSocket System
 
 A comprehensive WebSocket system featuring a high-performance, scalable server implementation with Nginx load balancing and a sophisticated load testing toolkit. The system uses uWebSockets.js with Redis for the server component, Nginx for load balancing and proxying, and includes advanced load testing capabilities.
 
