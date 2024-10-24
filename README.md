@@ -18,39 +18,20 @@ A comprehensive WebSocket system featuring a high-performance, scalable server i
 
 ### Load Testing Features
 - Batch-based connection management
-- Configurable connection parameters
 - Memory usage monitoring and throttling
-- Detailed performance metrics collection
-- Automatic generation of performance charts
 - Connection timeout handling
+- Detailed performance metrics collection
 - Session-based statistics tracking
-- Real-time metrics reporting
+- Configurable connection parameters
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v18)
 - Redis server
 - Nginx
 - Docker and Docker Compose
 - Git
 - npm or yarn
-
-## Project Structure
-
-
-.
-├── server/
-│   ├── server.js              # Main WebSocket server implementation
-│   ├── Dockerfile            # Server Docker configuration
-│   └── docker-compose.yml    # Docker Compose configuration
-├── nginx/
-│   ├── nginx.conf            # Main Nginx configuration
-│   └── sites-available/
-│       └── default           # Default site configuration
-├── loadtest/
-│   ├── loadtest.js           # Load testing implementation
-│   └── package.json          # Load testing dependencies
-└── README.md                 # This file
 
 
 ## Quick Start
@@ -65,8 +46,8 @@ sudo apt install nginx
 
 2. Replace the default Nginx configuration:
 bash
-sudo cp nginx/nginx.conf /etc/nginx/nginx.conf
-sudo cp nginx/sites-available/default /etc/nginx/sites-available/default
+sudo cp nginx.conf /etc/nginx/nginx.conf
+sudo cp sites-available/default /etc/nginx/sites-available/default
 
 
 3. Test and restart Nginx:
@@ -75,36 +56,38 @@ sudo nginx -t
 sudo systemctl restart nginx
 
 
-### Server Setup
+### Docker Setup
 
 1. Clone the repository:
 bash
-git clone https://github.com/yourusername/websocket-system.git
-cd websocket-system
+git clone https://github.com/darkball1/stress-testing.git
+cd stress-testing
 
 
 2. Start the server using Docker Compose:
-bash
-cd server
 docker compose up --build -d
 
 
 3. Monitor the server logs:
-bash
 docker logs stress-testing-main-app-1
 
 
-### Load Testing Setup
+### Development Setup
 
-1. Install load testing dependencies:
-bash
-cd loadtest
+To run the server locally without Docker:
+
+1. Install dependencies:
 npm install
 
 
-2. Run the load test:
-bash
-node loadtest.js
+2. Start redis:
+redis-server
+
+3. Start server:
+node server.js
+
+4. Start benchmarking script:
+node advanced_benchmark.js
 
 
 ## Configuration
@@ -113,9 +96,7 @@ node loadtest.js
 The system uses Nginx as a load balancer and reverse proxy for WebSocket connections. The setup includes:
 - 12 WebSocket upstream servers (ports 9001-9012)
 - Load balancing using IP hash method
-- WebSocket protocol upgrade handling
 - Connection timeout configurations
-- SSL/TLS settings (if configured)
 
 Example Nginx configuration:
 nginx
@@ -128,24 +109,6 @@ upstream websocket {
     # ... up to
     server localhost:9012;
 }
-
-# Server configuration
-server {
-    listen 80;
-    server_name your_domain.com;
-
-    location /ws {
-        proxy_pass http://websocket;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_read_timeout 3600;
-        proxy_send_timeout 3600;
-    }
-}
-
 
 ### Server Configuration
 Environment variables for server:
@@ -217,7 +180,6 @@ json
 1. *Nginx Layer*:
    - Load balancing across 12 WebSocket instances
    - IP hash-based session persistence
-   - Protocol upgrade handling
    - Connection timeout management
 
 2. *Server Layer*:
@@ -261,7 +223,6 @@ The load testing tool generates several output files:
 ### Nginx
 - Configure appropriate buffer sizes
 - Adjust worker connections based on expected load
-- Set up SSL/TLS for secure WebSocket connections
 - Configure proper logging
 - Monitor connection counts per upstream server
 - Consider rate limiting for production environments
@@ -272,7 +233,6 @@ The load testing tool generates several output files:
 - Monitor Redis memory usage
 - Configure proper logging
 - Set up monitoring for worker process health
-- Implement appropriate security measures
 
 ### Load Testing
 - Adjust batch sizes based on available system resources
@@ -298,11 +258,6 @@ The system implements comprehensive error handling across all layers:
 
 Feel free to submit issues and enhancement requests!
 
-## License
-
-[Your chosen license]
-
-## Acknowledgments
 
 - Built with Node.js, uWebSockets.js, and the ws library
 - Nginx for load balancing and proxying
