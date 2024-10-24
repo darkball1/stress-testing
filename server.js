@@ -4,7 +4,7 @@ const Redis = require('ioredis');
 const cluster = require('cluster');
 const os = require('os');
 
-const port = cluster.isMaster ? 9001 : 9001 + cluster.worker.id;
+const port = cluster.isMaster ? 9001 : 9001 + cluster.worker.id - 1;
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 
 // Redis clients for pub/sub and data storage
