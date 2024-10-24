@@ -257,9 +257,3 @@ The system implements comprehensive error handling across all layers:
 ## Contributing
 
 Feel free to submit issues and enhancement requests!
-
-
-- Built with Node.js, uWebSockets.js, and the ws library
-- Nginx for load balancing and proxying
-- Charts generated using Chart.js
-- Redis for pub/sub and session management
