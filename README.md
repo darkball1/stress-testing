@@ -79,18 +79,22 @@ docker logs stress-testing-main-app-1
 To run the server locally without Docker:
 
 1. Install dependencies:
+```bash
 npm install
-
+```
 
 2. Start redis:
+```bash
 redis-server
-
+```
 3. Start server:
+```bash
 node server.js
-
+```
 4. Start benchmarking script:
+```bash
 node advanced_benchmark.js
-
+```
 
 ## Configuration
 
@@ -103,6 +107,7 @@ The system uses Nginx as a load balancer and reverse proxy for WebSocket connect
 Example Nginx configuration:
 nginx
 # WebSocket upstream configuration
+```bash
 upstream websocket {
     ip_hash;  # Session persistence
     server localhost:9001;
@@ -111,7 +116,7 @@ upstream websocket {
     # ... up to
     server localhost:9012;
 }
-
+```
 ### Server Configuration
 Environment variables for server:
 - REDIS_URL: Redis connection URL (default: redis://localhost:6379)
@@ -119,8 +124,8 @@ Environment variables for server:
 - Ports used: 9001-9012 for individual WebSocket instances
 
 ### Load Testing Configuration
-Key constants in loadtest.js:
-javascript
+Key constants in advanced_benchmark.js:
+```bash
 const BATCH_SIZE = 1000;           // Connections per batch
 const BATCH_INTERVAL = 1000;       // ms between batches
 const MAX_ACTIVE_BATCHES = 50;     // Number of concurrent batches
@@ -129,7 +134,7 @@ const MEMORY_CHECK_INTERVAL = 2000; // 2 seconds
 const MAX_MEMORY_USAGE = 0.85;     // 85% of available memory
 const WS_SERVER_URL = 'ws://localhost/ws';  // Nginx endpoint
 const MESSAGES_PER_CLIENT = 30;    // Messages per connection
-
+```
 
 ## API
 
@@ -141,40 +146,40 @@ const MESSAGES_PER_CLIENT = 30;    // Messages per connection
 
 #### Server to Client:
 1. Session Event:
-json
+```json
 {
     "type": "session",
     "sessionId": "uuid-v4",
     "timestamp": "ISO-8601-timestamp"
 }
-
+```
 
 2. Response Event:
-json
+```json
 {
     "type": "response",
     "message": "Message received successfully!",
     "messageCount": number
 }
-
+```
 
 3. Error Event:
-json
+```json
 {
     "type": "error",
     "message": "Failed to process message",
     "error": "error-message"
 }
-
+```
 
 4. Server Event:
-json
+```json
 {
     "type": "server-event",
     "message": "This is a server-side event",
     "timestamp": "ISO-8601-timestamp"
 }
-
+```
 
 ## Architecture
 
