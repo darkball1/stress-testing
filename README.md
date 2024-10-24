@@ -159,7 +159,7 @@ const MESSAGES_PER_CLIENT = 30;    // Messages per connection
 {
     "type": "response",
     "message": "Message received successfully!",
-    "messageCount": number
+    "messageCount": 10
 }
 ```
 
