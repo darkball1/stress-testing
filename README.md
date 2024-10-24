@@ -108,7 +108,7 @@ Example Nginx configuration:
 nginx
 # WebSocket upstream configuration
 ```bash
-upstream websocket {
+upstream websocket_servers {
     ip_hash;  # Session persistence
     server localhost:9001;
     server localhost:9002;
