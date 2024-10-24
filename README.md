@@ -83,15 +83,11 @@ To run the server locally without Docker:
 npm install
 ```
 
-2. Start redis:
-```bash
-redis-server
-```
-3. Start server:
+2. Start server:
 ```bash
 node server.js
 ```
-4. Start benchmarking script:
+3. Start benchmarking script:
 ```bash
 node advanced_benchmark.js
 ```
