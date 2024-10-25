@@ -17,12 +17,13 @@ A comprehensive WebSocket system featuring a high-performance, scalable server i
 - Support for backpressure monitoring
 
 ### Load Testing Features
-- Batch-based connection management
-- Memory usage monitoring and throttling
-- Connection timeout handling
+- Efficient Connection Pooling Mechanism
+- Concurrent Batch Message Processing
+- Efficient Connection Reuse
+- Robust Retry and Reconnection Logic
+- Effective Cleanup and Deregistration
 - Detailed performance metrics collection
-- Session-based statistics tracking
-- Configurable connection parameters
+- Comprehensive Memory Usage Monitoring
 
 ## Prerequisites
 
@@ -125,15 +126,20 @@ Environment variables for server:
 
 ### Load Testing Configuration
 Key constants in advanced_benchmark.js:
-```bash
-const BATCH_SIZE = 1000;           // Connections per batch
-const BATCH_INTERVAL = 1000;       // ms between batches
-const MAX_ACTIVE_BATCHES = 50;     // Number of concurrent batches
-const CONNECTION_TIMEOUT = 10000;   // 10 seconds
-const MEMORY_CHECK_INTERVAL = 2000; // 2 seconds
-const MAX_MEMORY_USAGE = 0.85;     // 85% of available memory
-const WS_SERVER_URL = 'ws://localhost/ws';  // Nginx endpoint
-const MESSAGES_PER_CLIENT = 30;    // Messages per connection
+```bash// Load Testing Configuration Constants
+// Load Testing Configuration Constants
+const WS_SERVER_URL = 'ws://localhost/ws';              // WebSocket server URL
+const BATCH_SIZE = 1000;                                 // Connections per batch
+const BATCH_INTERVAL = 1000;                             // Interval between batches (ms)
+const ACQUIRE_TIMEOUT = 15000;                           // Connection timeout (ms)
+const MESSAGES_PER_CLIENT = 40;                          // Messages per connection
+const MAX_CONCURRENT_BATCHES = 10;                       // Number of concurrent batches
+const MESSAGE_SEND_INTERVAL = 20;                        // Interval between message sends (ms)
+const MAX_RETRIES = 3;                                  // Maximum retries
+const RETRY_DELAY = 1000;                               // Retry delay (ms)
+const KEEP_ALIVE = true;                                // Keep-alive option
+const KEEP_ALIVE_INTERVAL = 30000;                      // Keep-alive interval (ms)
+
 ```
 
 ## API
@@ -200,8 +206,9 @@ const MESSAGES_PER_CLIENT = 30;    // Messages per connection
    - Batch processing for cleanup operations
 
 ### Load Testing Architecture
-- Batch-based connection management
-- Memory-aware throttling
+- Connection Pooling
+- Batch Message Sending
+- Retry Pooling Mechanism
 - Real-time metrics collection
 - Comprehensive error handling
 - Chart generation system
@@ -242,7 +249,7 @@ The load testing tool generates several output files:
 - Set up monitoring for worker process health
 
 ### Load Testing
-- Adjust batch sizes based on available system resources
+- Adjust batch sizes and maximum concurrent batches based on available system resources
 - Monitor system memory usage during tests
 - Consider network capacity when setting connection limits
 - Implement proper error handling
@@ -254,12 +261,10 @@ The system implements comprehensive error handling across all layers:
 - Nginx connection and proxy errors
 - Redis connection errors
 - WebSocket message transmission errors
-- Process crash recovery
 - Operation timeouts
 - Memory overflow situations
 - Connection failures
 - Message sending errors
-- Premature connection closures
 
 ## Contributing
 
