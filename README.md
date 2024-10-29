@@ -17,7 +17,6 @@ A comprehensive WebSocket system featuring a high-performance, scalable server i
 - Support for backpressure monitoring
 
 ### Load Testing Features
-- Efficient Connection Pooling Mechanism
 - Concurrent Batch Message Processing
 - Efficient Connection Reuse
 - Robust Retry and Reconnection Logic
@@ -206,9 +205,8 @@ const KEEP_ALIVE_INTERVAL = 30000;                      // Keep-alive interval (
    - Batch processing for cleanup operations
 
 ### Load Testing Architecture
-- Connection Pooling
 - Batch Message Sending
-- Retry Pooling Mechanism
+- Retry Mechanism
 - Real-time metrics collection
 - Comprehensive error handling
 - Chart generation system
